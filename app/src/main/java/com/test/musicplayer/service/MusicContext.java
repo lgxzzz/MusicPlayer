@@ -57,49 +57,22 @@ public class MusicContext {
 	}
 	
 	public void init(){
+		mSaveMusicBean = getSaveMusicBean();
 		mPlayerMgr =new MusicPlayerMgr(mContext);
-		mFileMgr = new MusicFileMgr(mContext);
 		mPlayerMgr.setEventListener(mListener);
 		mPlayerMgr.switchMode(Util.getMode(mContext));
-		mSaveMusicBean = getSaveMusicBean();
+		mFileMgr = new MusicFileMgr(mContext);
 		mFileMgr.setFileEventListener(new FileEvenListener() {
 			
 			@Override
 			public void onScanFileDetailFinish(List<MusicBean> musicBeans) {
 				// TODO Auto-generated method stub
 				Log.e(TAG, "onScanFileDetailFinish");
-				mPlayerMgr.setData(musicBeans);
-				mListener.onScanFinish();
-			}
-
-			@Override
-			public void onScanFileParentFinish(List<MusicBean> musicBeans) {
-				// TODO Auto-generated method stub
-				Log.e(TAG, "onScanFileParentFinish");
 				mPlayerMgr.setDefault(musicBeans);
-				mListener.onScanFinish();
+				mListener.onScanFinish(musicBeans);
 				isInit = true;
 				//初始化完成后加载上一次状态
 				mHandler.sendEmptyMessageDelayed(LOAD_SAVE, 500);
-			}
-
-			@Override
-			public void onLooperScanFileFinish(List<MusicBean> musicBeans,
-					boolean needToRefresh) {
-				// TODO Auto-generated method stub
-				Log.e(TAG, "onLooperScanFileFinish");
-				mListener.onLooper();
-				if (needToRefresh) {
-					mPlayerMgr.setData(musicBeans);
-					mListener.onScanFinish();
-				}
-			}
-
-			@Override
-			public void onScanSDFileFinish(List<MusicBean> musicBeans) {
-				// TODO Auto-generated method stub
-				mPlayerMgr.setSDData(musicBeans);
-				mListener.onScanSDFinish(musicBeans.size());
 			}
 		});
 	}
@@ -167,7 +140,6 @@ public class MusicContext {
 		
 	//保存当前播放状态
 	public void saveCurrentState(){
-		mFileMgr.saveState();
 		mPlayerMgr.saveState();
 	}
 	
@@ -234,7 +206,6 @@ public class MusicContext {
 						mPlayerMgr.setCurrent(mSaveMusicBean);
 						mPlayerMgr.seekTo(mSaveMusicBean.getProgress());
 						mPlayerMgr.play();
-						mListener.onScanFinish();
 					}else
 					{
 						mHandler.sendEmptyMessageDelayed(WAIT_SD_FILE, 2000);
@@ -277,7 +248,6 @@ public class MusicContext {
 						mPlayerMgr.setCurrent(mSaveMusicBean);
 						mPlayerMgr.seekTo(mSaveMusicBean.getProgress());
 						mPlayerMgr.play();
-						mListener.onScanFinish();
 					}else
 					{
 						mHandler.sendEmptyMessageDelayed(WAIT_SD_FILE, 2000);
@@ -288,7 +258,6 @@ public class MusicContext {
 					mPlayerMgr.setCurrent(mSaveMusicBean);
 					mPlayerMgr.seekTo(mSaveMusicBean.getProgress());
 					mPlayerMgr.play();
-					mListener.onScanFinish(); 
 				}
 			}else
 			{

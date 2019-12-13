@@ -71,7 +71,7 @@ public class Util {
 		if (mode > Constant.MODE_RANDOM) {
 			mode = Constant.MODE_SINGLE;
 		}
-		SharedPreferences sharedPreferences = mContext.getSharedPreferences("imelocalmusic", Context.MODE_PRIVATE); //私有数据
+		SharedPreferences sharedPreferences = mContext.getSharedPreferences("localmusic", Context.MODE_PRIVATE); //私有数据
 		Editor editor = sharedPreferences.edit();//获取编辑器
 		editor.putInt("mode", mode);
 		editor.commit();//提交修改
@@ -81,7 +81,7 @@ public class Util {
 	//加载mode
 	public static int getMode(Context mContext)
 	{
-		SharedPreferences sharedPreferences = mContext.getSharedPreferences("imelocalmusic", Context.MODE_PRIVATE); //私有数据
+		SharedPreferences sharedPreferences = mContext.getSharedPreferences("localmusic", Context.MODE_PRIVATE); //私有数据
 		int mode = sharedPreferences.getInt("mode", Constant.MODE_LIST);
 		return mode;
 	}

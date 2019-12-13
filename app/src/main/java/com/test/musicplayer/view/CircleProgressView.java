@@ -118,9 +118,9 @@ public class CircleProgressView extends View{
 	        mRectF.bottom = (height - mCircleLineStrokeWidth / 2)-80; // 右下角y
 
 //	        // 绘制圆圈，进度条背景
-//	        mPaint.setStrokeWidth(15);
-//	        mPaint.setColor(Color.parseColor("#8c380d"));
-//	        canvas.drawArc(mRectF, -90, 360, false, mPaint);
+	        mPaint.setStrokeWidth(15);
+	        mPaint.setColor(Color.parseColor("#8c380d"));
+	        canvas.drawArc(mRectF, -90, 360, false, mPaint);
 	        
 	        if (isPlay) {
 	        	mPauseIcon = big(mPauseIcon, 110, 110);
@@ -173,7 +173,7 @@ public class CircleProgressView extends View{
 	    	this.isPlay = isPlay;
 	    	this.invalidate();
 	    }
-	    
+
 	    public boolean getPlay(){
 	    	return isPlay;
 	    }

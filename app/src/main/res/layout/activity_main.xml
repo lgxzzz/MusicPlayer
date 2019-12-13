@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/info_bg"
+    android:id="@+id/music_info"
     >
     <com.test.musicplayer.view.MarqueeTextView
         android:id="@+id/music_info_song"
@@ -53,7 +54,7 @@
             android:id="@+id/music_info_play"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/play"
+            android:background="@drawable/play"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             />
@@ -83,15 +84,14 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         >
-        <CheckBox
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/music_info_lrc_checkbox"
-            android:button="@drawable/checkbox"
-            android:checked="false"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="20dp"
             android:layout_centerHorizontal="true"
+            android:text="列表"
+            android:id="@+id/music_list_btn"
             />
         <LinearLayout
             android:layout_width="wrap_content"
