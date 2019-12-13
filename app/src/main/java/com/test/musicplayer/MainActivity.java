@@ -49,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
             // app-defined int constant that should be quite unique
 
             return;
+        }else{
+            startMusicBackGroudService();
+
+            init();
         }
 
     }
